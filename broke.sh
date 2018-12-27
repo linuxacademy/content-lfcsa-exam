@@ -1,1 +1,1 @@
-if [ -r /var/log/messages ]; then echo "readable" > log.txt;
+if [ -r /var/log/messages ]; then echo "readable" > /root/log.txt;
