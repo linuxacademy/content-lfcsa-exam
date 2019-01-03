@@ -1,18 +1,18 @@
 #!/bin/bash
 #Script to set up the LFCSA Exam SERVER
 
-/bin/yum install httpd bind bind-utils nfs-utils docker git firewalld -y
 /bin/hostnamectl set-hostname server
-/bin/echo 'useradd pirate && for i in {1..10}; do mkdir /opt/movie$i; touch /opt/movie$i/$i.mp4; chown -R pirate.pirate /opt/*; touch /opt/movie1/validmovie.mp4; chown cloud_user.cloud_user /opt/movie1/validmovie.mp4; done' > /root/myscript.sh
+/sbin/setenforce 0
+/bin/yum install httpd bind bind-utils nfs-utils docker git firewalld -y
+/bin/systemctl start firewalld
 /bin/nohup /bin/sha1sum /dev/zero > /dev/null &
 /bin/echo 'logger This is my cron job.' > /tmp/cronscript.sh && /bin/chmod +x /tmp/cronscript.sh
 /usr/sbin/modprobe dummy
 /usr/sbin/ip link set name eth10 dev dummy0
 /bin/git clone https://github.com/linuxacademy/content-lfcsa-exam.git /tmp/exam
 /bin/cp /tmp/exam/chrony.conf /etc/chrony.conf
-#/bin/chmod +x /tmp/exam/chronyscript.sh && /tmp/exam/chronyscript.sh
 /bin/firewall-cmd --add-service={ntp,nfs,mountd,rpc-bind}
-yy/bin/systemctl restart chronyd
+/bin/systemctl restart chronyd
 /bin/cp /tmp/exam/httpd.broke /etc/httpd/conf/httpd.conf
 /sbin/useradd bwayne
 /sbin/useradd ckent
@@ -35,3 +35,5 @@ IP=$(hostname -i | cut -f4 -d" ")
 echo $IP >> /tmp/LAsetupLog
 sed -i "s/REPLACEME/$IP/" /etc/chrony.conf
 /bin/systemctl restart chronyd
+cp /tmp/exam/myscript.sh /root
+
