@@ -22,7 +22,7 @@
 /bin/cp /tmp/exam/example.zone /var/named/
 /bin/systemctl start named
 /bin/mkdir /nfsshare
-/bin/echo '/nfsshare *(rwsyncno_root_squash)' > /etc/exports
+/bin/echo '/nfsshare *(rw,sync,no_root_squash)' > /etc/exports
 /sbin/exportfs -a
 /bin/systemctl start nfs
 /bin/systemctl start docker
