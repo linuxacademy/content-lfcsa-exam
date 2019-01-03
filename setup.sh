@@ -12,7 +12,6 @@
 /bin/git clone https://github.com/linuxacademy/content-lfcsa-exam.git /tmp/exam
 /bin/cp /tmp/exam/chrony.conf /etc/chrony.conf
 /bin/firewall-cmd --add-service={ntp,nfs,mountd,rpc-bind}
-/bin/systemctl restart chronyd
 /bin/cp /tmp/exam/httpd.broke /etc/httpd/conf/httpd.conf
 /sbin/useradd bwayne
 /sbin/useradd ckent
